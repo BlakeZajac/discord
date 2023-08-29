@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-// In order for browser sync in Next 13 to not initialise too many Prisma clients.
-// Works by appending a new PrismaClient to globalThis, which is not affected by browser sync.
-
+// This code is used to prevent initializing multiple instances of PrismaClient when using browser sync in Next 13.
 declare global {
   var prisma: PrismaClient | undefined;
 }
