@@ -3,6 +3,8 @@ import { redirect } from "next/navigation";
 import { initialProfile } from "@/lib/initial-profile";
 import { db } from "@/lib/db";
 
+import { InitialModal } from "@/components/modals/InitialModal";
+
 const SetupPage = async () => {
   const profile = await initialProfile();
 
@@ -17,13 +19,13 @@ const SetupPage = async () => {
     },
   });
 
-  // Used to direct a user to the server and channel upon login or revisting
+  // After we get the server, let's send the user there
   if (server) {
     return redirect(`/servers/${server.id}`);
   }
 
   // If the user is not part of any servers, prompt them to create one!
-  return <div>Create a server</div>;
+  return <InitialModal />;
 };
 
 export default SetupPage;
