@@ -4,6 +4,8 @@ import { ChannelType } from "@prisma/client";
 import { db } from "@/lib/db";
 import { currentProfile } from "@/lib/current-profile";
 
+import ServerHeader from "@/components/server/ServerHeader";
+
 interface ServerSidebarProps {
   serverId: string;
 }
