@@ -52,7 +52,7 @@ export const NavigationSidebar = async () => {
           afterSignOutUrl="/"
           appearance={{
             elements: {
-              avatarBox: "h-[48px] w-[48px]",
+              avatarBox: "h-[32px] w-[32px]",
             },
           }}
         />
