@@ -2,8 +2,9 @@
 
 import { useForm } from "react-hook-form";
 import { useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 
+import qs from "query-string";
 import axios from "axios";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -43,6 +44,7 @@ const formSchema = z.object({
 export const InitialModal = () => {
   const [isMounted, setIsMounted] = useState(false);
   const router = useRouter();
+  const params = useParams();
 
   useEffect(() => {
     setIsMounted(true);
@@ -60,8 +62,15 @@ export const InitialModal = () => {
   const isLoading = form.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    const url = qs.stringifyUrl({
+      url: "/api/channels",
+      query: {
+        serverId: params?.serverId,
+      },
+    });
+
     try {
-      await axios.post("/api/servers/", values);
+      await axios.post(url, values);
 
       form.reset();
       router.refresh();
