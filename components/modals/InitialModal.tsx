@@ -63,7 +63,7 @@ export const InitialModal = () => {
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
     const url = qs.stringifyUrl({
-      url: "/api/channels",
+      url: "/api/servers",
       query: {
         serverId: params?.serverId,
       },
