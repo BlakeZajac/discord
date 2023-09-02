@@ -31,11 +31,6 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
   const router = useRouter();
   const params = useParams();
 
-  const isWindows = navigator.platform.toLowerCase().includes("win");
-  const isApple = navigator.platform.toLowerCase().includes("mac");
-
-  const keyCombination = isWindows ? "CTRL" : isApple ? "⌘" : "CTRL";
-
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -87,7 +82,7 @@ export const ServerSearch = ({ data }: ServerSearchProps) => {
           className="pointer-events-none inline-flex h-5 select-none items-center gap-1
         rounded border bg-muted px-1.5 font-mono text-xs font-medium text-muted-foreground ml-auto"
         >
-          <span className="text-xs">{keyCombination}</span>K
+          <span className="text-xs">⌘</span>K
         </kbd>
       </button>
 
