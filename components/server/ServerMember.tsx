@@ -13,7 +13,7 @@ interface ServerMemberProps {
   server: Server;
 }
 
-const iconClasses = "h-4 w-4 ml-2";
+const iconClasses = "h-4 w-4 ml-1";
 const roleIconMap = {
   [MemberRole.GUEST]: null,
   [MemberRole.MODERATOR]: (
@@ -37,14 +37,16 @@ export const ServerMember = ({ member, server }: ServerMemberProps) => {
         params?.memberId === member.id && "bg-zinc-700/20 dark:bg-zinc-700"
       )}
     >
-      <UserAvatar src={member.profile.imageUrl} className="h-6 w-6" />
+      <UserAvatar src={member.profile.imageUrl} className="!h-8 !w-8" />
       <p
         className={cn(
           "font-semibold text-sm text-zinc-500 group-hover:text-zinc-600 dark:text-zinc-400 dark:group-hover:text-zinc-300 transition",
           params?.channelId === member.id &&
             "text-primary dark:text-zinc-200 dark:group-hover:text-white"
         )}
-      ></p>
+      >
+        {member.profile.name}
+      </p>
       {icon}
     </button>
   );
