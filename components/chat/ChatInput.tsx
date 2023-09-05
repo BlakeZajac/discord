@@ -3,13 +3,14 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useModal } from "@/hooks/useModalStore";
 import axios from "axios";
 import qs from "query-string";
 
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { EmojiPicker } from "@/components/common/EmojiPicker";
 import { Plus, Smile } from "lucide-react";
-import { useModal } from "@/hooks/useModalStore";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -77,7 +78,7 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                   />
 
                   <div className="absolute top-7 right-8">
-                    <Smile />
+                    <EmojiPicker />
                   </div>
                 </div>
               </FormControl>
