@@ -10,7 +10,7 @@ import qs from "query-string";
 import { Form, FormControl, FormField, FormItem } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { EmojiPicker } from "@/components/common/EmojiPicker";
-import { Plus, Smile } from "lucide-react";
+import { Plus } from "lucide-react";
 
 interface ChatInputProps {
   apiUrl: string;
@@ -78,7 +78,11 @@ export const ChatInput = ({ apiUrl, query, name, type }: ChatInputProps) => {
                   />
 
                   <div className="absolute top-7 right-8">
-                    <EmojiPicker />
+                    <EmojiPicker
+                      onChange={(emoji: string) =>
+                        field.onChange(`${field.value} ${emoji}`)
+                      }
+                    />
                   </div>
                 </div>
               </FormControl>
