@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { Member, MemberRole, Profile } from "@prisma/client";
 
-import { Edit, FileIcon, ShieldAlert, ShieldCheck } from "lucide-react";
+import { Edit, FileIcon, ShieldAlert, ShieldCheck, Trash } from "lucide-react";
 
 import { UserAvatar } from "@/components/common/UserAvatar";
 import ActionTooltip from "@/components/common/ActionTooltip";
@@ -139,11 +139,18 @@ export const ChatItem = ({
               {canEditMessage && (
                 <ActionTooltip label="Edit">
                   <Edit
-                    className="cursor-pointer ml-auto w-4 h-4 text-zinc-500
+                    className="cursor-pointer ml-auto w-5 h-5 text-zinc-500
                   hover:text-zinc-600 dark:hover:text-zinc-300 transition"
                   />
                 </ActionTooltip>
               )}
+
+              <ActionTooltip label="Delete">
+                <Trash
+                  className="cursor-pointer ml-auto w-5 h-5 text-zinc-500
+                  hover:text-zinc-600 dark:hover:text-zinc-300 transition"
+                />
+              </ActionTooltip>
             </div>
           )}
         </div>
