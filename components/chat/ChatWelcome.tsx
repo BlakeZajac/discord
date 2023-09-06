@@ -3,11 +3,11 @@
 import { Hash } from "lucide-react";
 
 interface ChatWelcomeProps {
-  type: string;
-  name: "channel" | "conversation";
+  name: string;
+  type: "channel" | "conversation";
 }
 
-export const ChatWelcome = ({ type, name }: ChatWelcomeProps) => {
+export const ChatWelcome = ({ name, type }: ChatWelcomeProps) => {
   return (
     <div className="space-y-1 px-4">
       {type === "channel" && (
