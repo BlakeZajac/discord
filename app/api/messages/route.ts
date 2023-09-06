@@ -4,6 +4,7 @@ import { Message } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
+// Define the number of messages to receive in each batch
 const MESSAGES_BATCH = 20;
 
 export async function GET(req: Request) {
