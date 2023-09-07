@@ -74,11 +74,11 @@ export const ChatMessages = ({
   }
 
   return (
-    <div className="flex flex-col flex-1 py-4 overflow-y-auto">
+    <div className="flex flex-col flex-1 py-4 pb-0 overflow-y-auto">
       <div className="flex-1" />
       <ChatWelcome type={type} name={name} />
 
-      <div className="flex flex-col-reverse mt-auto">
+      <div className="flex flex-col-reverse mt-auto pt-2">
         {data?.pages?.map((group, index) => (
           <Fragment key={index}>
             {group.items.map((message: MessageWithMemberWithProfile) => (
