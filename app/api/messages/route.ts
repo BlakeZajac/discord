@@ -4,7 +4,6 @@ import { Message } from "@prisma/client";
 import { currentProfile } from "@/lib/current-profile";
 import { db } from "@/lib/db";
 
-// Define the number of messages to receive in each batch
 const MESSAGES_BATCH = 20;
 
 export async function GET(req: Request) {
@@ -16,11 +15,11 @@ export async function GET(req: Request) {
     const channelId = searchParams.get("channelId");
 
     if (!profile) {
-      return new NextResponse("Unauthorised.", { status: 401 });
+      return new NextResponse("Unauthorized", { status: 401 });
     }
 
     if (!channelId) {
-      return new NextResponse("Channel ID not found.", { status: 400 });
+      return new NextResponse("Channel ID missing", { status: 400 });
     }
 
     let messages: Message[] = [];
@@ -32,11 +31,9 @@ export async function GET(req: Request) {
         cursor: {
           id: cursor,
         },
-
         where: {
           channelId,
         },
-
         include: {
           member: {
             include: {
@@ -44,7 +41,6 @@ export async function GET(req: Request) {
             },
           },
         },
-
         orderBy: {
           createdAt: "desc",
         },
@@ -55,7 +51,6 @@ export async function GET(req: Request) {
         where: {
           channelId,
         },
-
         include: {
           member: {
             include: {
@@ -63,7 +58,6 @@ export async function GET(req: Request) {
             },
           },
         },
-
         orderBy: {
           createdAt: "desc",
         },
@@ -81,7 +75,7 @@ export async function GET(req: Request) {
       nextCursor,
     });
   } catch (error) {
-    console.log("[MESSAGES_ERROR]", error);
-    return new NextResponse("Internal error.", { status: 500 });
+    console.log("[MESSAGES_GET]", error);
+    return new NextResponse("Internal Error", { status: 500 });
   }
 }
