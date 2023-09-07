@@ -6,6 +6,7 @@ import { Member, Message, Profile } from "@prisma/client";
 import { Loader2, ServerCrash } from "lucide-react";
 
 import { useChatQuery } from "@/hooks/useChatQuery";
+import { useChatSocket } from "@/hooks/useChatSocket";
 
 import { ChatWelcome } from "@/components/chat/ChatWelcome";
 import { ChatItem } from "@/components/chat/ChatItem";
@@ -42,6 +43,8 @@ export const ChatMessages = ({
   type,
 }: ChatMessagesProps) => {
   const queryKey = `chat:${chatId}`;
+  const addKey = `chat:${chatId}:messages`;
+  const updateKey = `chat:${chatId}:messages:update`;
 
   const { data, fetchNextPage, hasNextPage, isFetchingNextPage, status } =
     useChatQuery({
@@ -50,6 +53,8 @@ export const ChatMessages = ({
       paramKey,
       paramValue,
     });
+
+  useChatSocket({ queryKey, addKey, updateKey });
 
   if (status === "loading") {
     return (
