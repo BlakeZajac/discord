@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { useModal } from "@/hooks/useModalStore";
-import { useRouter } from "next/navigation";
 import axios from "axios";
 import qs from "query-string";
 
@@ -18,10 +17,9 @@ import { Button } from "@/components/ui/button";
 
 export const DeleteMessageModal = () => {
   const { onOpen, isOpen, onClose, type, data } = useModal();
-  const router = useRouter();
 
   const isModalOpen = isOpen && type === "deleteMessage";
-  const { server, channel } = data;
+  const { apiUrl, query } = data;
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,16 +27,13 @@ export const DeleteMessageModal = () => {
     try {
       setIsLoading(true);
       const url = qs.stringifyUrl({
-        url: `/api/channels/${channel?.id}`,
-        query: {
-          serverId: server?.id,
-        },
+        url: apiUrl || "",
+        query,
       });
 
       await axios.delete(url);
+
       onClose();
-      router.refresh();
-      router.push(`/servers/${server?.id}`);
     } catch (error) {
       console.log(error);
     } finally {
@@ -51,15 +46,11 @@ export const DeleteMessageModal = () => {
       <DialogContent className="bg-white text-black p-0 overflow-hidden">
         <DialogHeader className="pt-8 px-6">
           <DialogTitle className="text-xl text-center font-bold">
-            Delete channel
+            Delete message
           </DialogTitle>
 
           <DialogDescription className="text-center text-zinc-500">
-            Are you sure you want to delete{" "}
-            <span className="font-semibold text-indigo-500">
-              #{channel?.name}
-            </span>
-            ?
+            Are you sure you want to delete this message?
             <br />
             This action cannot be undone.
           </DialogDescription>
@@ -76,7 +67,7 @@ export const DeleteMessageModal = () => {
               onClick={onClick}
               variant="destructive"
             >
-              Delete server
+              Delete message
             </Button>
           </div>
         </DialogFooter>
