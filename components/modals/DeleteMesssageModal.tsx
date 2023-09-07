@@ -20,7 +20,7 @@ export const DeleteMessageModal = () => {
   const { onOpen, isOpen, onClose, type, data } = useModal();
   const router = useRouter();
 
-  const isModalOpen = isOpen && type === "deleteChannel";
+  const isModalOpen = isOpen && type === "deleteMessage";
   const { server, channel } = data;
 
   const [isLoading, setIsLoading] = useState(false);
